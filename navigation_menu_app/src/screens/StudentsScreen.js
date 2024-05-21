@@ -1,46 +1,58 @@
 import React from 'react';
 import { View, StyleSheet, Text, FlatList, Image, ScrollView } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { LinearGradient } from 'expo-linear-gradient';
 import estudiante from '../data/estudiantes';
 
-const StudentsScreen= () => {
-
+const StudentsScreen = () => {
     return (
-        <View style={styles.container}>
+        <LinearGradient colors={['#DC6AF6', '#FFFFFF']} style={styles.linearGradient}>
             <ScrollView>
-            <View>
-                <FlatList
-                    data={estudiante}
-                    renderItem={({ item }) => (
-                        <View style={styles.cardContainer}>
-                            <Image source={item.image} style={styles.image} />
-                            <Text style={styles.title}>{item.name}</Text>
-                            <Text style={styles.info}>{item.description}</Text>
-                        </View>
-                    )}
-                    keyExtractor={(item) => item.id}
-                    contentContainerStyle={styles.flatListContainer}
-                />
-                
-            </View>
-            <View style={styles.height}></View>
+                <View>
+                    <FlatList
+                        data={estudiante}
+                        renderItem={({ item }) => (
+                            <View style={styles.cardContainer}>
+                                <Text style={styles.mainTitle}>{item.promedio}</Text>
+                                <Image source={item.image} style={styles.image} />
+                                <Text style={styles.title}>Grado:</Text>
+                                <Text style={styles.info}>{item.grado}</Text>
+                                <Text style={styles.title}>Carnet:</Text>
+                                <Text style={styles.info}>{item.carnet}</Text>
+                                <Text style={styles.title}>Especialidad:</Text>
+                                <Text style={styles.info}>{item.especialidad}</Text>
+                                <Text style={styles.title}>{item.name}</Text>
+                                <Text style={styles.info}>{item.description}</Text>
+                                <View style={styles.row}>
+                                    <Text style={styles.title}>Edad:</Text>
+                                    <Text style={styles.info}>{item.edad}</Text>
+                                    <Text style={styles.title}> || </Text>
+                                    <Text style={styles.title}> Género:</Text>
+                                    <Text style={styles.info}>{item.genero}</Text>
+                                </View>
+                            </View>
+                        )}
+                        keyExtractor={(item) => item.id}
+                        contentContainerStyle={styles.flatListContainer}
+                    />
+                </View>
+                <View style={styles.height}></View>
             </ScrollView>
-        </View>
+        </LinearGradient>
     );
 };
 
 export default StudentsScreen;
 
 const styles = StyleSheet.create({
-    container: {
+    linearGradient: {
+        flex: 1,
         paddingTop: 20,
-        backgroundColor: 'white'
     },
     flatListContainer: {
         padding: 5,
-        flexDirection: 'row', 
+        flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-around', 
+        justifyContent: 'space-around',
     },
     cardContainer: {
         backgroundColor: '#fff',
@@ -48,8 +60,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#ccc',
         marginBottom: 25,
-        width: 180,
-        height: 300,
+        width: 300,
+        height: 550,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -58,11 +70,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        alignItems:'center'
+        alignItems: 'center'
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginHorizontal: 15
     },
     image: {
-        width: 180,
-        height: 100,
+        marginVertical: 10,
+        width: 250,
+        height: 150,
         marginBottom: 10,
         borderRadius: 8
     },
@@ -75,19 +94,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#E7CFFC',
         padding: 10,
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: 5,
         fontSize: 20,
+        borderRadius: 55,
+        marginVertical: 10,
         fontWeight: 'bold',
         color: 'purple'
     },
-    texto:{
-        marginHorizontal:15
+    texto: {
+        marginHorizontal: 15
     },
     contenedor: {
         alignItems: 'center',
     },
-    info:{
-        padding:10
+    info: {
+        padding: 10
     },
     height: {
         height: 80
